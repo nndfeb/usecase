@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+actor "Admin" as a1
+actor "Masyarakat" as m1
+rectangle "Aplikasi Pelaporan"{
+  usecase "Login" as login
+  usecase "Daftar" as daftar
+  usecase "Logout" as logout
+  usecase "Mengelola Profile" as mp
+  usecase "Membuat Pengaduan" as membuat_pengaduan
+  usecase "Melihat Pengaduan" as melihat_pengaduan
+  usecase "Mengelola Pengaduan" as mengelola_pengaduan
+  usecase "Mengelola Landingpage" as mengelola_lp
+  usecase "Landingpage" as lp
+  usecase "Verifikasi Pengaduan" as vp
+  usecase "Mencetak SPSP2" as cetak_spsp2
+  usecase "Unggah SPSP2" as unggah_spsp2
+  usecase "Disposisi" as D
+  usecase "Unggah berkas SP3D" as unggah_sp3d
+  usecase "Melihat berkas SP3D" as melihat_sp3d
+
+
+  (unggah_spsp2) .> (mengelola_pengaduan) : include
+  (unggah_sp3d) .> (mengelola_pengaduan) : include
+  (vp) .> (mengelola_pengaduan) : include
+  (cetak_spsp2) .> (vp) : include
+  (D) .> (mengelola_pengaduan) : include
+
+  (melihat_sp3d) .> (melihat_pengaduan) : include
+  (melihat_pengaduan) .> (login) : include
+  (mp) .> (login) : include
+  (membuat_pengaduan) .> (login) : include
+
+}
+
+a1 --> login
+a1 --> logout
+a1 --> mengelola_pengaduan
+a1 --> mengelola_lp
+a1 --> cetak_spsp2
+a1 --> vp
+a1 --> D
+
+m1 --> login
+m1 --> logout
+m1 --> daftar
+m1 --> mp
+m1 --> membuat_pengaduan
+m1 --> melihat_pengaduan
+m1 --> lp
+m1 --> melihat_sp3d
+@enduml
